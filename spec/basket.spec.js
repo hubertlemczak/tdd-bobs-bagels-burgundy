@@ -9,14 +9,14 @@ describe('Basket', () => {
     basket = new Basket();
   });
 
-  //Test 1
+  //Test 1 good
   it('Get all basket', () => {
     const expected = [];
     let getBasket = basket.getBasket();
     expect(getBasket).toEqual(expected);
   });
 
-  //Test 2
+  //Test 2 good
   it('Add items to basket', () => {
     const expected = [
       { item: 'bagel', quantity: 1, price: 2.99 },
@@ -28,8 +28,15 @@ describe('Basket', () => {
     let bagelInBasket = basket.getBasket();
     expect(bagelInBasket).toEqual(expected);
   });
+  // good
+  it('Add items to basket invalid', () => {
+    const expected = 'Please enter valid quantity';
 
-  //Test 3
+    let bagelInBasket = basket.addItem('bagel', -2);
+    expect(bagelInBasket).toEqual(expected);
+  });
+
+  //Test 3 good
   it('Remove bagel from basket', () => {
     const expected = [{ item: 'brownie', quantity: 3, price: 3.99 }];
 
@@ -39,7 +46,7 @@ describe('Basket', () => {
     expect(removeItem).toEqual(expected);
   });
 
-  //Test 4
+  //Test 4 good
   it('Alert when basket is full', () => {
     const expected = 'Basket full, Please choose a bigger basket.';
 
@@ -49,7 +56,7 @@ describe('Basket', () => {
     expect(alert).toEqual(expected);
   });
 
-  //Test 5
+  //Test 5 good
   it('Create basket with larger size', () => {
     const expected = (this.basketSize = largeBasket);
 
@@ -58,7 +65,17 @@ describe('Basket', () => {
     expect(checkSize).toEqual(expected);
   });
 
-  //Test 6
+  //good
+  it('Large Basket full', () => {
+    const expected = 'Basket full, Please choose a bigger basket.';
+
+    new Basket(largeBasket);
+    basket.addItem('bagel', 16);
+    const result = basket.basketCapacity();
+    expect(result).toEqual(expected);
+  });
+
+  //Test 6 good
   it('Alert when trying to remove item that doesnt exist inside basket', () => {
     const expected = 'This item is not in the basket.';
 

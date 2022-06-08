@@ -8,25 +8,27 @@ class Basket {
     this.basket = [];
     this.basketSize = capacity;
   }
-
+  // good
   getBasket() {
     return this.basket;
   }
-
+  //good
   addItem(itemName, itemQuantity) {
     const fullMenu = MENU.GetMenu();
-    for (const items in fullMenu) {
-      if (items === itemName) {
-        const insideBasket = {
-          item: itemName,
-          quantity: itemQuantity,
-          price: fullMenu[items],
-        };
-        this.basket.push(insideBasket);
+    if (itemQuantity > 0) {
+      for (const items in fullMenu) {
+        if (items === itemName) {
+          const insideBasket = {
+            item: itemName,
+            quantity: itemQuantity,
+            price: fullMenu[items],
+          };
+          this.basket.push(insideBasket);
+        }
       }
-    }
+    } else return 'Please enter valid quantity';
   }
-
+  // good
   removeItem(itemName) {
     for (let i = 0; i < this.basket.length; i++) {
       if (this.basket[i].item === itemName) {
@@ -35,14 +37,10 @@ class Basket {
       } else return 'This item is not in the basket.';
     }
   }
-
+  // good
   basketCapacity() {
-    const totalCapacity = this.basket.reduce((total, quantity) => {
-      return total + quantity.quantity;
-    }, 0);
-    if (totalCapacity > this.basketSize) {
-      return 'Basket full, Please choose a bigger basket.';
-    }
+    const totalCapacity = this.basket.reduce((prev, current) => prev + current.quantity, 0);
+    if (totalCapacity > this.basketSize) return 'Basket full, Please choose a bigger basket.';
   }
 
   priceChecker(itemName) {
@@ -65,4 +63,6 @@ class Basket {
   }
 }
 
+// const basket = new Basket();
+// console.log(basket.addItem('brownie', 3));
 module.exports = Basket;
