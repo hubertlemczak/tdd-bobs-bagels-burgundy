@@ -45,10 +45,9 @@ class Basket {
 
   priceChecker(itemName) {
     const fullMenu = MENU.GetMenu();
-    for (const items in fullMenu)
-      if (itemName === items) {
-        return fullMenu[items];
-      }
+    for (const items in fullMenu) {
+      if (itemName === items) return fullMenu[items];
+    }
   }
 
   basketTotal() {
