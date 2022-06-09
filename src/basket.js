@@ -43,6 +43,8 @@ class Basket {
     if (totalCapacity > this.basketSize) return 'Basket full, Please choose a bigger basket.';
   }
 
+  //good
+
   priceChecker(itemName) {
     const fullMenu = MENU.GetMenu();
     for (const items in fullMenu) {
@@ -50,18 +52,34 @@ class Basket {
     }
   }
 
+  // Well done, Pae!
+
   basketTotal() {
-    let eachItem = [];
+    let total = 0;
     for (let i = 0; i < this.basket.length; i++) {
-      eachItem.push(this.basket[i].quantity * this.basket[i].price);
+      total += (this.basket[i].quantity * this.basket[i].price);
     }
-    const totalPrice = eachItem.reduce((total, quantity) => {
-      return total + quantity;
-    }, 0);
-    return '£' + totalPrice;
+    return '£' + total;
   }
+
+  // Old: 
+
+  // basketTotal() {
+  //   const eachItem = [];
+  //   for (let i = 0; i < this.basket.length; i++) {
+  //     eachItem.push(this.basket[i].quantity * this.basket[i].price);
+  //   }
+  //   const totalPrice = eachItem.reduce((total, quantity) => {
+  //     return total + quantity;
+  //   }, 0);
+  //   return '£' + totalPrice;
+  // }
 }
 
-// const basket = new Basket();
-// console.log(basket.addItem('brownie', 3));
+const basket = new Basket();
+basket.addItem('chocolateBagel', 3);
+basket.addItem('bagel', 1);
+basket.addItem('brownie', 3);
+console.log(basket.basketTotal())
+
 module.exports = Basket;
